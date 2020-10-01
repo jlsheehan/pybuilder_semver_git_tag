@@ -130,10 +130,9 @@ def _seek_last_semver_tag(tags, excluded_short=''):
     :return: _TagInfo with the latest SemVer tag name
     """
     last_semver_tag = None
-    semver_regex = semver._REGEX  # pylint: disable=protected-access
     for tag in tags:
-        match = semver_regex.match(tag.short)
-        if match and tag.short != excluded_short:
+        is_vaild_tag_version = semver.VersionInfo.isvalid(tag.short)
+        if is_vaild_tag_version and tag.short != excluded_short:
             if ((not last_semver_tag) or
                     (semver.compare(tag.short, last_semver_tag.short) == 1)):
                 last_semver_tag = tag

@@ -151,7 +151,7 @@ class VersionFromGitTests(TestCase):
             set_version_from_git_tag(self.project, self.logger)
         err_msg = str(context.exception)
         self.assertTrue(
-            "Directory `basedir` isn't git repository root." in err_msg)
+            "Directory `{}` isn't git repository root.".format(self.project.basedir) in err_msg)
 
     @patch("pybuilder_semver_git_tag._get_repo_info",
            return_value=([_TagInfo('not_semver2', 'commit2', ''),
